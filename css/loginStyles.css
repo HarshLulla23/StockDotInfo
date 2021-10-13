@@ -61,11 +61,19 @@ html,body{
     font-style: normal;
     font-weight: normal;
     outline: 0;
-    border-width: 0 0 1px;
-    color: #989191;
+    border-width: 0 0 2px;
+    /* color: #989191; */
     width: 27vw;
     font-family: 'Open Sans', sans-serif;
 }
+.inpute[type=email]:focus{
+    border-width: 0 0 2.2px;
+    border-color: black;
+  }
+.inputp[type=password]:focus{
+    border-width: 0 0 2.0px;
+    border-color: black;
+  }
 
 .p{
     position: relative;
@@ -88,12 +96,23 @@ html,body{
     margin-left: 7vw;
     outline: 0;
     font-family: 'Open Sans', sans-serif;
-    border-width: 0 0 1px;
-    color: #989191;
-    border-color: #989191;
+    border-width: 0 0 2px;
+    /* color: #989191; */
+    /* border-color: #989191; */
     font-style: normal;
     font-weight: normal;
     width: 27vw;
+}
+.inputp:hover{
+    border-width: 0 0 2.2px;
+    border-color: black;
+}
+.inpute:hover{
+    border-width: 0 0 2.2px;
+    border-color: black;
+}
+.l1:hover{
+    color: #383838;
 }
 .b1{
     margin-top: 6vw;
@@ -141,5 +160,4 @@ html,body{
     font-weight: normal;
     font-size: 2vw;
     margin-left: 15vw;
-}
 }
