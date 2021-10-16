@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  /* overflow: hidden; */
 }
 .unorder {
   list-style-type: none;
@@ -27,12 +28,25 @@
 .anchor.active{
     background-color: #49494b;
     color: #DDE2FF;
+    border-left: 3px solid #DDE2FF;
 }
 
 .container {
   background-color: #383838;
   width: 15%;
   height: 100vh;
+  position: sticky;
+  top: 0px;
+  display: inline-block;
+  z-index: 2;
+  overflow: hidden;
+}
+.data{
+  display: flex;
+}
+.lorem{
+  width: 80%;
+  margin-left: 2%;
 }
 .heading {
   color: #a4a6b3;
@@ -52,6 +66,8 @@
 /* .activeicon{
     max-width: 2.3vw;
     max-height: 5.6vh;
+    position: relative;
+    left: 0;
     box-sizing: border-box;
     display: inline-block;
 
