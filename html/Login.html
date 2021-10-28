@@ -15,17 +15,20 @@
 <body>
     <div class="left">
         <p class="title">StockDotInfo</p>
-        <form action="" class="login">
+        <form  action="loginProcess.php" method="post" enctype="multipart/form-data" class="login">
             <div class="i1">
                 <div class="e">EMAIL:</div>
-                <input type="email" required name="EMAIL" class="inpute" placeholder="Example@gmail.com">
+                <input type="email" required name="email" class="inpute" placeholder="Example@gmail.com">
             </div>
             <div class="i2">
                 <div class="p">PASSWORD:</div>
-                <input type="password" required name="PASSWORD" class="inputp" placeholder="********">
+                <input type="password" required name="pass" class="inputp" placeholder="********">
             </div>
-            <input type="submit" value="LOGIN" class="b1">
-            <label for="notmember" class="l1">Not yet member?</label>
+            <input type="submit" name="save" value="LOGIN" class="b1">
+
+            <a href="SignUp.html">
+                <label for="notmember" class="l1">Not yet member?</label>
+            </a>
         </form>
     </div>
     <div class="right">

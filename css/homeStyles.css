@@ -63,6 +63,39 @@
     max-height: 2.5vh;
     margin-right: 0.5vw;
 }
+.text
+{
+  color: #383838;
+  font-style: normal;
+  margin-top: 2vh;
+  font-size: 1.3em;
+  font-family: "Open Sans", sans-serif;
+}
+.textbold{
+  color: #383838;
+  font-style: normal;
+  font-weight: 500;
+  margin-top: 5vh;
+  font-size: 1.4em;
+  font-family: "Open Sans", sans-serif;
+}
+.title{
+  font-family: "Open Sans", sans-serif;
+  margin-top: 2vw;
+  margin-left: 30vw;
+  width: 50vw;
+  box-sizing: border-box;
+  font-weight: 900;
+  font-size: 2.5em;
+  color: #383838;
+  font-style: normal;
+}
+.imglogo{
+  margin-left: 20vw;
+  margin-top: 5vh;
+  height: 40vh;
+  width: 40vw;
+}
 /* .activeicon{
     max-width: 2.3vw;
     max-height: 5.6vh;

@@ -17,26 +17,31 @@
     <p class="are">Are you ready to learn Stocks?</p>
  </div>
  <div class="right">
-    <form action="" class="signup">
+    <form action="signupDB.php" method="post" enctype="multipart/form-data" class="signup">
         <div class="i1">
             <div class="u">USERNAME:</div>
-            <input type="text" required name="USERNAME" class="inputu" placeholder="rohitsharma">
+            <input type="text" required name="username" class="inputu" placeholder="rohitsharma">
         </div>
         <div class="i2">
             <div class="e">EMAIL:</div>
-            <input type="email" required name="EMAIL" class="inpute" placeholder="Example@gmail.com">
+            <input type="email" required  class="inpute" name="email" placeholder="Example@gmail.com">
         </div>
         <div class="i3">
             <div class="p">PASSWORD:</div>
-            <input type="password" required name="PASSWORD" class="inputp" placeholder="********">
+            <input type="password" required class="inputp" name="pass" placeholder="********">
         </div>
         <div class="i4">
             <div class="cp">CONFIRM PASSWORD:</div>
-            <input type="password" required name="PASSWORD" class="inputcp" placeholder="********">
+            <input type="password" required class="inputcp" placeholder="********">
         </div>
-        <input type="button" value="Choose a profile photo" class="b1">
-        <input type="submit" value="REGISTER" class="b2">
+        <label for="file-upload"  class="b1">Choose a profile photo</label>
+        <input id="file-upload" type="file" name="file"/>
+        
+        <input type="submit" name="save" value="REGISTER" class="b2">
+        
+        <a href="Login.html">
             <label for="notmember" class="l1">I am already a member</label>
+        </a>
  </div>
  </form>  
 </body>
