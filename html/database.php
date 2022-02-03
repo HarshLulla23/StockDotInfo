@@ -1,9 +1,9 @@
 <?php
-    $url='localhost';
+    $url='localhost:3307';
     $username='kunal';
     $password='kunal';
     $conn=mysqli_connect($url,$username,$password,"register");
     if(!$conn){
-        die('Could not Connect My Sql:' .mysql_error());
+        die('Could not Connect My Sql:');
     }
 ?>
