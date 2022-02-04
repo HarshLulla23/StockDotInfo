@@ -6,7 +6,7 @@ const suggBox = searchinput.querySelector(".autocom-box");
 //if user press key and release
 
 inputBox.onkeyup = (e) => {
-    let userData = e.target.value; //user entered data
+    let userData = e.target.value.toLocaleLowerCase(); //user entered data
     let emptyArray =[];
     if(userData){
         emptyArray = suggestions.filter((data)=>{
