@@ -51,7 +51,12 @@ inputBox.onkeyup = (e) => {
             console.log("File not found");
         }
     }
-    xhr.send();
+    if(userData.length > 2){
+        xhr.send();
+    }
+    else{
+        searchinput.classList.remove("active");
+    }
 }
 function select(element) {
     let selectUserData = element.textContent;
