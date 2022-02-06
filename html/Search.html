@@ -10,14 +10,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@200;700&family=Open+Sans:wght@300;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="../css/searchStyles.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <!-- <script async src='/cdn-cgi/bm/cv/669835187/api.js'></script> -->
     <title>Home</title>
 </head>
 
 <body>
-    
-    
+
+
     <div class="flexdata">
         <div class="container">
             <div class="heading">
@@ -74,29 +74,66 @@
             </nav>
         </div>
         <div class="searchhead">
-           <div class="di1">
-            <div class="wrapper">
-            <div class="search-input">
-                <input type="text" placeholder="Type to serach..." style="border:none">
-                <div class="autocom-box">
-                    <li>Login to preochd hsfh</li>
-                    <li>Login to preochd hsfh</li>
-                    <li>Login to preochd hsfh</li>
-                    <li>Login to preochd hsfh</li>
-                    <li>Login to preochd hsfh</li>
-                    <li>Login to preochd hsfh</li>
+            <div class="di1">
+                <div class="wrapper">
+                    <div class="search-input">
+                        <input type="text" placeholder="Type to serach..." style="border:none">
+                        <div class="autocom-box">
+                            <li>Login to preochd hsfh</li>
+                            <li>Login to preochd hsfh</li>
+                            <li>Login to preochd hsfh</li>
+                            <li>Login to preochd hsfh</li>
+                            <li>Login to preochd hsfh</li>
+                            <li>Login to preochd hsfh</li>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
                 </div>
-                <div class="icon">
-                    <i class= "fas fa-search"></i>
+                <p class="interesthead">You may be Intrested in:</p>
+                <p class="lastdate">Last Updated:</p>
+                <div class="interest">
+                    <table class="interesttable">
+                        <tr>
+
+                        </tr>
+                        <tbody class="companydata">
+
+                        </tbody>
+                    </table>
                 </div>
-            </div>
-            </div>
             </div>
         </div>
     </div>
+    <script>
+        var myarray =[
+            {'symbol':'reliance.bse','close':'2331.80','change':'-20.90','changepercent':'-0.88'},
+            {'symbol':'reliance.bse','close':'2331.80','change':'-20.90','changepercent':'-0.88'},
+            {'symbol':'reliance.bse','close':'2331.80','change':'-20.90','changepercent':'-0.88'},
+            {'symbol':'reliance.bse','close':'2331.80','change':'-20.90','changepercent':'-0.88'},
+            {'symbol':'reliance.bse','close':'2331.80','change':'-20.90','changepercent':'-0.88'}
+        ];
+        buildTable(myarray);
+        function buildTable(data){
+            var table = document.querySelector(".companydata");
+            for(var i = 0; i < data.length;i++){
+                console.log(data[i].symbol);
+                var row =`<tr>
+                        <td>${data[i].symbol}</td>
+                        <td>${data[i].close}</td>
+                        <td>${data[i].change}</td>
+                        <td>${data[i].changepercent}</td>
+                        </tr>`
+                        table.innerHTML += row;
+            }
+            
+        }
+    </script>
     <script src="../js/suggestions.js"></script>
     <script async src="../js/searchscript.js"></script>
-    
+    <script src="../js/getdate.js"></script>
+
 </body>
 
 </html>
