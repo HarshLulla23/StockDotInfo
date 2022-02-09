@@ -11,112 +11,16 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../css/searchStyles.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- <script async src='/cdn-cgi/bm/cv/669835187/api.js'></script> -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>Home</title>
-    <!-- <script>
-        function getdate() {
-                const xhr1 = new XMLHttpRequest();
-                // Open an obejct (GET/POST, PATH,
-                // ASYN-TRUE/FALSE)
-                xhr1.open("GET","https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=IBM&apikey=RGLFHEB1DW0JDEF1",true);
-                xhr1.onload = function (){
-                    if(this.status===200){
-                        var data = JSON.parse(this.responseText);
-                        var date = data["Global Quote"]["07. latest trading day"];
-                        let dateP = document.querySelector(".lastdate");
-                        dateP.innerText = dateP.innerText + date;
-                    }
-                    else{
-                        console.log("nodata");
-                    }
-                }
-                xhr1.send();
-            }
-            
-// var myarray =[
-        //     {'symbol':'reliance.bse','close':'2331.80','change':'-20.90','changepercent':'-0.88'},
-        //     {'symbol':'reliance.bse','close':'2331.80','change':'-20.90','changepercent':'-0.88'},
-        //     {'symbol':'reliance.bse','close':'2331.80','change':'-20.90','changepercent':'-0.88'},
-        //     {'symbol':'reliance.bse','close':'2331.80','change':'-20.90','changepercent':'-0.88'},
-        //     {'symbol':'reliance.bse','close':'2331.80','change':'-20.90 ,'changepercent':'-0.88'}
-            / ];
-        // buildTable(myarray);
-        // function buildTable(data){
-        //     var table = document.querySelector(".companydata");
-        //     for(var i = 0; i < data.length;i++){
-        //         console.log(data[i].symbol);
-        //         var row =`<tr>
-        //                 <td>${data[i].symbol}</td>
-        //                 <td>${data[i].close}</td>
-        //                 <td>${data[i].change}</td>
-        //                 <td>${data[i].changepercent}</td>
-        //                 </tr>`
-        //                 table.innerHTML += row;
-        //     }
-            
-        // }
- 
-     </script> -->
-     <script>
-         var tradedate;
-         let dateobj = new Date();
-         let month = dateobj.getMonth()+1;
-         let date = dateobj.getDate();
-         let year = dateobj.getFullYear();
-         tradedate = ""+ year+'-'+month+'-'+date;
-        //  function getdate() {
-        //         const xhr1 = new XMLHttpRequest();
-        //         // Open an obejct (GET/POST, PATH,
-        //         // ASYN-TRUE/FALSE)
-        //         xhr1.open("GET","https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=IBM&apikey=RGLFHEB1DW0JDEF1",true);
-        //         xhr1.onload = function (){
-        //             if(this.status===200){
-        //                 var data = JSON.parse(this.responseText);
-        //                 tradedate = data["Global Quote"]["07. latest trading day"];
-        //                 console.log(tradedate);
-        //             }
-        //             else{
-        //                 console.log("nodata");
-        //             }
-        //         }
-        //         xhr1.send();
-        //     }
-        function updatedatabase(key){
-            const xhr2 = new XMLHttpRequest();
-                // Open an obejct (GET/POST, PATH,
-                // ASYN-TRUE/FALSE)
-                xhr2.open("GET","https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol="+key+"&apikey=RGLFHEB1DW0JDEF1",true);
-                xhr2.onload = function (){
-                    if(this.status===200){
-                        var data = JSON.parse(this.responseText);  
-                        console.log(data); 
-                        '<?php
-                        $connn = mysqli_connect('localhost','root','','searchpage');
-                        if (!$connn) {
-                          die("Connection failed: " . mysqli_connect_error());
-                        }
-                        else{ ?>'
-                            console.log("connection successfull for" + key);
-                       '<?php }
-                        mysqli_close($connn);
-                        
-                        // $sql = "SELECT * FROM searchpagedata";
-                        // $result = mysqli_query($connn,$sql);
-                        ?>'
-                    }
-                    else{
-                        console.log("nodata");
-                    }
-                }
-                xhr2.send();
-        }
-        
-     </script>
 
 </head>
+
 <body>
 
+    <form action="search.php" name="getdata">
+    <input type="hidden" id="btnClickedValue" name="btnClickedValue" value="" />
     <div class="flexdata">
         <div class="container">
             <div class="heading">
@@ -133,7 +37,7 @@
                                 Home</a>
                         </li>
                         <li class="list">
-                            <a href="Search.php" class="anchor active">
+                            <a href="Search.html" class="anchor active">
                                 <img src="../images/Search.png" alt="img" class="icons"></img>
                                 Search
                             </a>
@@ -205,55 +109,128 @@
             </div>
         </div>
     </div>
-<?php
-$conn = mysqli_connect('localhost','root','','searchpage');
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
-else{
-}
-
-$sql = "SELECT * FROM searchpagedata";
-$result = mysqli_query($conn,$sql);
-if (mysqli_num_rows($result) > 0) {?>
-<script>
-var table = document.querySelector(".companydata");
-var thead = `<tr>
-                         <td>Comapny Name</td>
-                         <td>Close</td>
-                         <td>Change</td>
-                         <td>Change Percent</td>
-            </tr>`
-            table.innerHTML += thead;            
-</script>
-<?php
-while($row = mysqli_fetch_assoc($result)) {?>
-<script>
-var lastdate = `<?php echo $row['lastupdatedate']?>`;
-if(lastdate == tradedate){
-    var row =`<tr>
-                         <td><?php echo $row['company_name'] ?></td>
-                         <td><?php echo $row['close'] ?></td>
-                         <td><?php echo $row['difference'] ?></td>
-                         <td><?php echo $row['percent'] ?></td>
-         </tr>`
-    table.innerHTML += row;
-    }
-else{
-      //updatedatabase(`<?php echo $row['symbol']?>`);
-    }   
-</script> 
-<?php
-}
-}
-else{
-echo "Data not fetched";
-}
-mysqli_close($conn);
-?>
-    <script src="../js/suggestions.js"></script>
+    <script>
+        
+        // var myarray =[
+        //     {'symbol':'reliance.bse','close':'2331.80','change':'-20.90','changepercent':'-0.88'},
+        //     {'symbol':'reliance.bse','close':'2331.80','change':'-20.90','changepercent':'-0.88'},
+        //     {'symbol':'reliance.bse','close':'2331.80','change':'-20.90','changepercent':'-0.88'},
+        //     {'symbol':'reliance.bse','close':'2331.80','change':'-20.90','changepercent':'-0.88'},
+        //     {'symbol':'reliance.bse','close':'2331.80','change':'-20.90','changepercent':'-0.88'}
+        // ];
+        // buildTable(myarray);
+        // function buildTable(data){
+        //     var table = document.querySelector(".companydata");
+        //     for(var i = 0; i < data.length;i++){
+        //         console.log(data[i].symbol);
+        //         var row =`<tr>
+        //                 <td>${data[i].symbol}</td>
+        //                 <td>${data[i].close}</td>
+        //                 <td>${data[i].change}</td>
+        //                 <td>${data[i].changepercent}</td>
+        //                 </tr>`
+        //                 table.innerHTML += row;
+        //     }  
+        // }
+    </script>
     <script src="../js/searchscript.js"></script>
-    <!-- <script src="../js/getdate.js"></script> -->
+</form>
+<script type="text/javascript">
 
- </body>
+let dateP = document.querySelector(".lastdate");
+let dateobj = new Date();
+let current = dateobj.getDate();
+
+let month = dateobj.getMonth() + 1;
+console.log(month);
+let date = dateobj.getDate();
+let year = dateobj.getFullYear();
+let ltd=1;
+
+let stringtime= year+"-"+month+"-"+date;
+
+let value=`<?php
+include("searchdatabase.php");
+$sql="SELECT dates FROM `searchpagedata` where symbol='APLE'";
+$result=$conn-> query($sql);
+while($row =$result->fetch_assoc()){
+    echo $row["dates"];
+}
+$conn-> close();
+?>`;
+
+if(value==stringtime){
+    var abcd= 2;  
+}
+else if(value!=stringtime){
+    var abcd= 0; 
+}
+</script>
+    
+   <?php
+       
+		include("searchdatabase.php");
+		$sql="SELECT * FROM `searchpagedata`";
+		$result=$conn-> query($sql);
+		if($result-> num_rows > 0){
+			while($row =$result->fetch_assoc()){?>
+                <script type="text/javascript">
+                if(abcd==2){
+                var table = document.querySelector(".companydata");
+                var row =`<tr><td>
+                <?php echo $row["company_name"];?>
+                </td><td>
+                <?php echo $row["closed"];?>
+                </td><td>
+                <?php echo $row["differences"];?>
+                </td><td>
+                <?php echo $row["percent"];?>
+                </td></tr>`;
+                table.innerHTML += row;
+                // echo 'console.log("hello");';
+                if(ltd==1){
+                dateP.innerText = dateP.innerText + " "+`<?php echo $row["lastTradingDay"];?>`;
+                ltd=0;
+                }
+                }
+                else if(abcd==0){
+                    console.log(abcd);
+                    var valo= `<?php echo $row["symbol"];?>`;
+                console.log("hello");
+                
+                $.ajax({
+                        url: 'updateDatabase.php',
+                        type: 'post',
+                        data: { "callFunc1": valo},
+                        success: function(response) { console.log(response);
+                            var table = document.querySelector(".companydata");
+                            var row =`<tr><td>
+                            <?php echo $row["company_name"];?>
+                            </td><td>
+                            <?php echo $row["closed"];?>
+                            </td><td>
+                            <?php echo $row["differences"];?>
+                            </td><td>
+                            <?php echo $row["percent"];?>
+                            </td></tr>`;
+                            table.innerHTML += row;
+                            if(ltd==1){
+                            dateP.innerText = dateP.innerText + " "+`<?php echo $row["lastTradingDay"];?>`;
+                            ltd=0;
+                            }
+                         }
+                    });
+                    console.log("hello");
+                }
+                </script>
+                <?php
+				}
+			}
+		else{
+		echo "0 result";
+		}
+        $conn-> close();
+?>
+</script>
+</body>
 </html>
