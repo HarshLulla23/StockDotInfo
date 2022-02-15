@@ -1,7 +1,7 @@
 <?php
-    $servername="localhost:3307";
-		$username="kunal";
-		$password="kunal";
+    $servername="localhost";
+		$username="root";
+		$password="";
 		$dbname="searchpage";
 		$conn=mysqli_connect($servername,$username,$password,$dbname);
 		if($conn-> connect_error){
