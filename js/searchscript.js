@@ -2,7 +2,7 @@
 const searchinput = document.querySelector(".search-input");
 const inputBox = searchinput.querySelector("input");
 const suggBox = searchinput.querySelector(".autocom-box");
-
+var sym = {};
 //if user press key and release
 
 inputBox.onkeyup = (e) => {
@@ -24,6 +24,7 @@ inputBox.onkeyup = (e) => {
 
             for (key in obj["bestMatches"]) {
                 suggestions1.push(obj["bestMatches"][key]["2. name"]);
+                sym[obj["bestMatches"][key]["2. name"]] = obj["bestMatches"][key]["1. symbol"];
             }
 
             if (userData) {
@@ -62,6 +63,7 @@ function select(element) {
     let selectUserData = element.textContent;
     inputBox.value = selectUserData; //passing the user selected list item in textfield
     searchinput.classList.remove("active"); //hide auto complete box
+    console.log(sym[selectUserData]);
 
 }
 
