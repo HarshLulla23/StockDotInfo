@@ -13,7 +13,7 @@ inputBox.onkeyup = (e) => {
 
     // Open an obejct (GET/POST, PATH,
     // ASYN-TRUE/FALSE)
-    xhr.open("GET","https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords="+userData+"&apikey=RGLFHEB1DW0JDEF1", true);
+    xhr.open("GET", "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" + userData + "&apikey=RGLFHEB1DW0JDEF1", true);
 
     // When response is ready
     xhr.onload = function () {
@@ -51,10 +51,10 @@ inputBox.onkeyup = (e) => {
             console.log("File not found");
         }
     }
-    if(userData.length > 2){
+    if (userData.length > 2) {
         xhr.send();
     }
-    else{
+    else {
         searchinput.classList.remove("active");
     }
 }
