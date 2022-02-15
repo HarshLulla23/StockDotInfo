@@ -149,9 +149,21 @@ let ltd=1;
 
 let stringtime= year+"-"+month+"-"+date;
 
+
+var table = document.querySelector(".companydata");
+var thead = `<tr>
+                         <td>Comapny Name</td>
+                         <td>Close</td>
+                         <td>Change</td>
+                         <td>Change Percent</td>
+            </tr>`
+            table.innerHTML += thead;            
+
+
+
 let value=`<?php
 include("searchdatabase.php");
-$sql="SELECT dates FROM `searchpagedata` where symbol='APLE'";
+$sql="SELECT dates FROM `searchpagedata` where symbol='AAPL'";
 $result=$conn-> query($sql);
 while($row =$result->fetch_assoc()){
     echo $row["dates"];
@@ -203,17 +215,7 @@ else if(value!=stringtime){
                         type: 'post',
                         data: { "callFunc1": valo},
                         success: function(response) { console.log(response);
-                            var table = document.querySelector(".companydata");
-                            var row =`<tr><td>
-                            <?php echo $row["company_name"];?>
-                            </td><td>
-                            <?php echo $row["closed"];?>
-                            </td><td>
-                            <?php echo $row["differences"];?>
-                            </td><td>
-                            <?php echo $row["percent"];?>
-                            </td></tr>`;
-                            table.innerHTML += row;
+                           
                             if(ltd==1){
                             dateP.innerText = dateP.innerText + " "+`<?php echo $row["lastTradingDay"];?>`;
                             ltd=0;
@@ -222,6 +224,7 @@ else if(value!=stringtime){
                     });
                     console.log("hello");
                 }
+
                 </script>
                 <?php
 				}
@@ -231,6 +234,11 @@ else if(value!=stringtime){
 		}
         $conn-> close();
 ?>
+<script>
+                if(abcd==0)
+                {
+                    window.location.reload();
+                }
 </script>
 </body>
 </html>

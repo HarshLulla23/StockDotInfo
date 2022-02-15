@@ -20,7 +20,7 @@ if(isset($_POST['save']))
     {
         echo '<script type="text/javascript">'; 
         echo 'alert("password incorrect");'; 
-        echo 'window.location.href = "Login.php";';
+        echo 'window.location.href = "Login.html";';
         echo '</script>';
     }
 }
