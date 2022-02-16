@@ -15,6 +15,7 @@ inputBox.onkeyup = (e) => {
     // ASYN-TRUE/FALSE)
     xhr.open("GET", "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" + userData + "&apikey=RGLFHEB1DW0JDEF1", true);
 
+
     // When response is ready
     xhr.onload = function () {
         if (this.status === 200) {
