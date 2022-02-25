@@ -37,7 +37,7 @@
                                 Home</a>
                         </li>
                         <li class="list">
-                            <a href="Search.html" class="anchor active">
+                            <a href="Search.php" class="anchor active">
                                 <img src="../images/Search.png" alt="img" class="icons"></img>
                                 Search
                             </a>
@@ -80,7 +80,7 @@
             <div class="di1">
                 <div class="wrapper">
                     <div class="search-input">
-                        <input type="text" placeholder="Type to serach..." style="border:none">
+                        <input type="text" name="place" placeholder="Type to search..." autocomplete="off"  style="border:none">
                         <div class="autocom-box">
                             <li>Login to preochd hsfh</li>
                             <li>Login to preochd hsfh</li>
@@ -89,11 +89,13 @@
                             <li>Login to preochd hsfh</li>
                             <li>Login to preochd hsfh</li>
                         </div>
+                        <a href="detail.html">
                         <div class="icon">
                             <a href="detail.html">
                             <i class="fas fa-search"></i>
                             </a>
                         </div>
+                        </a>
                     </div>
                 </div>
                 <p class="interesthead">You may be Intrested in:</p>
@@ -151,9 +153,21 @@ let ltd=1;
 
 let stringtime= year+"-"+month+"-"+date;
 
+
+var table = document.querySelector(".companydata");
+var thead = `<tr>
+                         <td>Comapny Name</td>
+                         <td>Close</td>
+                         <td>Change</td>
+                         <td>Change Percent</td>
+            </tr>`
+            table.innerHTML += thead;            
+
+
+
 let value=`<?php
 include("searchdatabase.php");
-$sql="SELECT dates FROM `searchpagedata` where symbol='APLE'";
+$sql="SELECT dates FROM `searchpagedata` where symbol='AAPL'";
 $result=$conn-> query($sql);
 while($row =$result->fetch_assoc()){
     echo $row["dates"];
@@ -205,17 +219,7 @@ else if(value!=stringtime){
                         type: 'post',
                         data: { "callFunc1": valo},
                         success: function(response) { console.log(response);
-                            var table = document.querySelector(".companydata");
-                            var row =`<tr><td>
-                            <?php echo $row["company_name"];?>
-                            </td><td>
-                            <?php echo $row["closed"];?>
-                            </td><td>
-                            <?php echo $row["differences"];?>
-                            </td><td>
-                            <?php echo $row["percent"];?>
-                            </td></tr>`;
-                            table.innerHTML += row;
+                           
                             if(ltd==1){
                             dateP.innerText = dateP.innerText + " "+`<?php echo $row["lastTradingDay"];?>`;
                             ltd=0;
@@ -224,6 +228,7 @@ else if(value!=stringtime){
                     });
                     console.log("hello");
                 }
+
                 </script>
                 <?php
 				}
@@ -233,6 +238,11 @@ else if(value!=stringtime){
 		}
         $conn-> close();
 ?>
+<script>
+                if(abcd==0)
+                {
+                    window.location.reload();
+                }
 </script>
 </body>
 </html>

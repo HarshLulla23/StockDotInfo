@@ -3,6 +3,7 @@ const searchinput = document.querySelector(".search-input");
 const inputBox = searchinput.querySelector("input");
 const suggBox = searchinput.querySelector(".autocom-box");
 var sym = {};
+
 //if user press key and release
 
 inputBox.onkeyup = (e) => {
@@ -14,7 +15,8 @@ inputBox.onkeyup = (e) => {
 
     // Open an obejct (GET/POST, PATH,
     // ASYN-TRUE/FALSE)
-    xhr.open("GET","https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords="+userData+"&apikey=RGLFHEB1DW0JDEF1", true);
+    xhr.open("GET", "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" + userData + "&apikey=RGLFHEB1DW0JDEF1", true);
+
 
     // When response is ready
     xhr.onload = function () {
@@ -24,8 +26,8 @@ inputBox.onkeyup = (e) => {
             var obj = JSON.parse(this.responseText);
 
             for (key in obj["bestMatches"]) {
-                suggestions1.push(obj["bestMatches"][key]["2. name"]+" ("+obj["bestMatches"][key]["1. symbol"]+")");
-                sym[obj["bestMatches"][key]["2. name"]] = obj["bestMatches"][key]["1. symbol"];
+                suggestions1.push(obj["bestMatches"][key]["2. name"] + " " + obj["bestMatches"][key]["1. symbol"]);
+                sym[obj["bestMatches"][key]["2. name"] + " " + obj["bestMatches"][key]["1. symbol"]] = obj["bestMatches"][key]["1. symbol"];
             }
 
             if (userData) {
@@ -53,10 +55,10 @@ inputBox.onkeyup = (e) => {
             console.log("File not found");
         }
     }
-    if(userData.length > 2){
+    if (userData.length > 2) {
         xhr.send();
     }
-    else{
+    else {
         searchinput.classList.remove("active");
     }
 }
@@ -65,7 +67,10 @@ function select(element) {
     inputBox.value = selectUserData; //passing the user selected list item in textfield
     searchinput.classList.remove("active"); //hide auto complete box
     console.log(sym[selectUserData]);
-    sessionStorage.setItem("symbolselected",sym[selectUserData]);
+    if (sym != null) {
+        sessionStorage.setItem("symbol", sym[selectUserData]);
+        sessionStorage.setItem("name", selectUserData);
+    }
 }
 
 function showSuggestions(list) {
@@ -79,4 +84,10 @@ function showSuggestions(list) {
     }
     suggBox.innerHTML = listData;
 }
-console.log(sessionStorage.getItem("symbolselected"));
+// if (sessionStorage.getItem("lastname") != null) {
+//     var sId = sessionStorage.getItem("lastname");
+//     console.log(sId);
+//     if (inputBox.value == "") {
+
+//     }
+// }
