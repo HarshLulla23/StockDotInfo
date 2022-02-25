@@ -91,7 +91,9 @@
                         </div>
                         <a href="detail.html">
                         <div class="icon">
+                            <a href="detail.html">
                             <i class="fas fa-search"></i>
+                            </a>
                         </div>
                         </a>
                     </div>

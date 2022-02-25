@@ -10,6 +10,7 @@ inputBox.onkeyup = (e) => {
     let userData = e.target.value.toLocaleLowerCase(); //user entered data
     let emptyArray = [];
     let suggestions1 = [];
+    let suggestionsym ={};
     const xhr = new XMLHttpRequest();
 
     // Open an obejct (GET/POST, PATH,
@@ -90,4 +91,3 @@ function showSuggestions(list) {
 
 //     }
 // }
-
