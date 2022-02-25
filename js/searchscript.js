@@ -9,6 +9,7 @@ inputBox.onkeyup = (e) => {
     let userData = e.target.value.toLocaleLowerCase(); //user entered data
     let emptyArray = [];
     let suggestions1 = [];
+    let suggestionsym ={};
     const xhr = new XMLHttpRequest();
 
     // Open an obejct (GET/POST, PATH,
@@ -23,7 +24,7 @@ inputBox.onkeyup = (e) => {
             var obj = JSON.parse(this.responseText);
 
             for (key in obj["bestMatches"]) {
-                suggestions1.push(obj["bestMatches"][key]["2. name"]);
+                suggestions1.push(obj["bestMatches"][key]["2. name"]+" ("+obj["bestMatches"][key]["1. symbol"]+")");
                 sym[obj["bestMatches"][key]["2. name"]] = obj["bestMatches"][key]["1. symbol"];
             }
 
@@ -64,7 +65,7 @@ function select(element) {
     inputBox.value = selectUserData; //passing the user selected list item in textfield
     searchinput.classList.remove("active"); //hide auto complete box
     console.log(sym[selectUserData]);
-
+    sessionStorage.setItem("symbolselected",sym[selectUserData]);
 }
 
 function showSuggestions(list) {
@@ -78,3 +79,4 @@ function showSuggestions(list) {
     }
     suggBox.innerHTML = listData;
 }
+console.log(sessionStorage.getItem("symbolselected"));

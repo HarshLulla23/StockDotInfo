@@ -90,7 +90,9 @@
                             <li>Login to preochd hsfh</li>
                         </div>
                         <div class="icon">
+                            <a href="detail.html">
                             <i class="fas fa-search"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
