@@ -10,7 +10,7 @@ function test($data1){
         else{
             require __DIR__ . "/vendor/autoload.php";
             $client = new GuzzleHttp\Client();
-            $response = $client->request("GET","https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=".$data1."&apikey=QPW8V5WIR40AKG1U");
+            $response = $client->request("GET","https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=".$data1."&apikey=RGLFHEB1DW0JDEF1");
             $data = json_decode($response->getBody(), true);
             $myfile = fopen("../jsonFiles/".$data1.".json", "w") or die("Unable to open file!");
             fwrite($myfile, json_encode($data));
