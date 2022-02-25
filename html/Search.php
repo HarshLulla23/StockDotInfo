@@ -37,7 +37,7 @@
                                 Home</a>
                         </li>
                         <li class="list">
-                            <a href="Search.html" class="anchor active">
+                            <a href="Search.php" class="anchor active">
                                 <img src="../images/Search.png" alt="img" class="icons"></img>
                                 Search
                             </a>
@@ -80,7 +80,7 @@
             <div class="di1">
                 <div class="wrapper">
                     <div class="search-input">
-                        <input type="text" placeholder="Type to serach..." style="border:none">
+                        <input type="text" name="place" placeholder="Type to search..." autocomplete="off"  style="border:none">
                         <div class="autocom-box">
                             <li>Login to preochd hsfh</li>
                             <li>Login to preochd hsfh</li>
@@ -89,9 +89,11 @@
                             <li>Login to preochd hsfh</li>
                             <li>Login to preochd hsfh</li>
                         </div>
+                        <a href="detail.html">
                         <div class="icon">
                             <i class="fas fa-search"></i>
                         </div>
+                        </a>
                     </div>
                 </div>
                 <p class="interesthead">You may be Intrested in:</p>

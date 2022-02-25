@@ -3,6 +3,7 @@ const searchinput = document.querySelector(".search-input");
 const inputBox = searchinput.querySelector("input");
 const suggBox = searchinput.querySelector(".autocom-box");
 var sym = {};
+
 //if user press key and release
 
 inputBox.onkeyup = (e) => {
@@ -24,8 +25,8 @@ inputBox.onkeyup = (e) => {
             var obj = JSON.parse(this.responseText);
 
             for (key in obj["bestMatches"]) {
-                suggestions1.push(obj["bestMatches"][key]["2. name"]);
-                sym[obj["bestMatches"][key]["2. name"]] = obj["bestMatches"][key]["1. symbol"];
+                suggestions1.push(obj["bestMatches"][key]["2. name"] + " " + obj["bestMatches"][key]["1. symbol"]);
+                sym[obj["bestMatches"][key]["2. name"] + " " + obj["bestMatches"][key]["1. symbol"]] = obj["bestMatches"][key]["1. symbol"];
             }
 
             if (userData) {
@@ -65,7 +66,10 @@ function select(element) {
     inputBox.value = selectUserData; //passing the user selected list item in textfield
     searchinput.classList.remove("active"); //hide auto complete box
     console.log(sym[selectUserData]);
-
+    if (sym != null) {
+        sessionStorage.setItem("symbol", sym[selectUserData]);
+        sessionStorage.setItem("name", selectUserData);
+    }
 }
 
 function showSuggestions(list) {
@@ -79,3 +83,11 @@ function showSuggestions(list) {
     }
     suggBox.innerHTML = listData;
 }
+// if (sessionStorage.getItem("lastname") != null) {
+//     var sId = sessionStorage.getItem("lastname");
+//     console.log(sId);
+//     if (inputBox.value == "") {
+
+//     }
+// }
+
