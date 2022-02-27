@@ -23,6 +23,47 @@ var tb1r12 = greyback.querySelector(".td13");
 var tb1r13 = greyback.querySelector(".td14");
 var tb1r14 = greyback.querySelector(".td15");
 var tb1r15 = greyback.querySelector(".td16");
+var ctx = /** @type {HTMLCanvasElement} */ (document.getElementById("myChart")).getContext("2d");
+var col = ["red"];
+var chartData = new Chart(ctx, {
+    type: "line",
+    data: {
+        labels: [],
+        datasets: [
+            {
+                data: [],
+                label: ["open"],
+                backgroundColor: ["#f78594"],
+                borderColor: ["#FF4560"],
+            },
+            {
+                data: [],
+                label: ["High"],
+                backgroundColor: ["#7ac1f4"],
+                borderColor: ["#008FFB"],
+
+            },
+            {
+                data: [],
+                label: ["Low"],
+                backgroundColor: ["#74e0ba"],
+                borderColor: ["#00E396"],
+            },
+            {
+                data: [],
+                label: ["Close"],
+                backgroundColor: ["#f3c569"],
+                borderColor: ["#FEB019"],
+            },
+        ],
+
+    },
+    options: {
+        responsive: false,
+        borderColor: ["red"],
+        BackgroundColor: ["red"],
+    }
+})
 // const xhr = new XMLHttpRequest();
 
 // Open an obejct (GET/POST, PATH,
@@ -106,6 +147,53 @@ function fun() {
                 var data = JSON.parse(text);
                 console.log(data["Meta Data"]["3. Last Refreshed"]);
                 subdate.innerText = data["Meta Data"]["3. Last Refreshed"];
+                var labelsNew = [];
+                var dataNew1 = [];
+                var dataNew2 = [];
+                var dataNew3 = [];
+                var dataNew4 = [];
+
+                let i = 0;
+                var obj2 = data["Time Series (Daily)"];
+                for (var key3 in obj2) {
+                    if (i < 25) {
+                        labelsNew.push(key3);
+                        dataNew1.push(data["Time Series (Daily)"][key3]["1. open"]);
+                        dataNew2.push(data["Time Series (Daily)"][key3]["2. high"]);
+                        dataNew3.push(data["Time Series (Daily)"][key3]["3. low"]);
+                        dataNew4.push(data["Time Series (Daily)"][key3]["4. close"]);
+                    }
+                    else {
+                        break;
+                    }
+                    i++;
+                }
+
+                // for(var key in data["Time Series (Daily)"]) {
+                //     for (var key1 in data[key]){
+                //         console.log(data[key][key1])
+                //     }
+                //  }
+                function addData(chart, label, data1, data2, data3, data4) {
+                    chart.data.labels = label
+                    let cou = 1;
+                    chart.data.datasets.forEach((dataset) => {
+                        if (cou == 1) { dataset.data = data1; }
+                        else if (cou == 2) { dataset.data = data2; }
+                        else if (cou == 3) { dataset.data = data3; }
+                        else if (cou == 4) { dataset.data = data4; }
+                        cou++;
+                    });
+                    chart.update();
+                }
+                labelsNew.reverse();
+                dataNew1.reverse();
+                dataNew2.reverse();
+                dataNew3.reverse();
+                dataNew4.reverse();
+                console.log(dataNew2);
+                addData(chartData, labelsNew, dataNew1, dataNew2, dataNew3, dataNew4);
+
             });
             readTextFile("../jsonFiles/" + symbol + "OverView.json", function (text) {
                 var data = JSON.parse(text);

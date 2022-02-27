@@ -14,6 +14,7 @@
     <!-- <script async src='/cdn-cgi/bm/cv/669835187/api.js'></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="../js/setDetailData.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
     <title>Detail page</title>
 </head>
 <body>
@@ -142,7 +143,7 @@
                             <p class="monthly">Monthly</p>
                         </div>
                         <div class="graph">
-                            <img class="graphimg" src="../images/Capture.JPG" alt="">
+                            <canvas id="myChart" aria-label="chart" role="img" height="350" width="600"></canvas>
                         </div>
                     </div>
                     <p class="news">News</p>

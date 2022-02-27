@@ -27,7 +27,8 @@ function test($data1){
             $myfile2 = fopen("../jsonFiles/".$data1."Quote.json", "w") or die("Unable to open file!");
             fwrite($myfile2, json_encode($data3));
             fclose($myfile2);
-        }
+        } 
+        
 }
 if (isset($_POST['objectData'])) {
     echo test($_POST['objectData']);
