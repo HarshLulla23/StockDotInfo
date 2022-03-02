@@ -203,7 +203,7 @@ else if(value!=stringtime){
                 var table = document.querySelector(".companydata");
                 var c =<?php echo (int)$row["closed"];?>;
                 var d = <?php echo (int)$row["differences"];?>;
-                var p = <?php echo (int)$row["percent"];?>;
+                var p = <?php echo (float)$row["percent"];?>;
                 var row =`<tr><td style="color: #3b3c3d; font-family: "Mulish", sans-serif;"><?php echo $row["company_name"];?></td>`;
                 row+=`<td style="color: #3b3c3d;font-family: "Mulish", sans-serif;"><?php echo $row["closed"];?></td>`
                 if(d>=0){
