@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- <script async src='/cdn-cgi/bm/cv/669835187/api.js'></script> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500&display=swap" rel="stylesheet">
+
     <title>Home</title>
 
 </head>
@@ -99,7 +103,7 @@
                     </div>
                 </div>
                 <p class="interesthead">You may be Intrested in:</p>
-                <p class="lastdate">Last Updated:</p>
+                <p class="lastdate" style="font-weight: 510;color: #3b3c3d; font-family: Mulish" >Last Updated:</p>
                 <div class="interest">
                     <table class="interesttable">
                         <tr>
@@ -155,7 +159,7 @@ let stringtime= year+"-"+month+"-"+date;
 
 
 var table = document.querySelector(".companydata");
-var thead = `<tr>
+var thead = `<tr style="font-weight: 510;color: #3b3c3d; font-family: "Mulish", sans-serif; >
                          <td>Comapny Name</td>
                          <td>Close</td>
                          <td>Change</td>
@@ -189,19 +193,31 @@ else if(value!=stringtime){
 		$sql="SELECT * FROM `searchpagedata`";
 		$result=$conn-> query($sql);
 		if($result-> num_rows > 0){
-			while($row =$result->fetch_assoc()){?>
+			while($row =$result->fetch_assoc()){
+                $closed=$row["closed"];
+                $differe=$row["differences"];
+                $perce=$row["percent"];              
+?>
                 <script type="text/javascript">
                 if(abcd==2){
                 var table = document.querySelector(".companydata");
-                var row =`<tr><td>
-                <?php echo $row["company_name"];?>
-                </td><td>
-                <?php echo $row["closed"];?>
-                </td><td>
-                <?php echo $row["differences"];?>
-                </td><td>
-                <?php echo $row["percent"];?>
-                </td></tr>`;
+                var c =<?php echo (int)$row["closed"];?>;
+                var d = <?php echo (int)$row["differences"];?>;
+                var p = <?php echo (int)$row["percent"];?>;
+                var row =`<tr><td style="color: #3b3c3d; font-family: "Mulish", sans-serif;"><?php echo $row["company_name"];?></td>`;
+                row+=`<td style="color: #3b3c3d;font-family: "Mulish", sans-serif;"><?php echo $row["closed"];?></td>`
+                if(d>=0){
+                    row+=`<td style="color: #27BC86; font-weight: 400; font-family: Mulish"><?php echo $row["differences"];?></td>`
+                }
+                else{
+                    row+=`<td style="color: red;font-weight: 400; font-family: Mulish"><?php echo $row["differences"];?></td>`
+                }
+                if(p>=0){
+                    row+=`<td style="color: #27BC86;font-weight: 400; font-family: Mulish"><?php echo $row["percent"];?></td>`
+                }
+                else{
+                    row+=`<td style="color: red;font-weight: 400; font-family: Mulish"><?php echo $row["percent"];?></td></tr>`;
+                }
                 table.innerHTML += row;
                 // echo 'console.log("hello");';
                 if(ltd==1){
