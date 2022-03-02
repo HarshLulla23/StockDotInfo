@@ -25,175 +25,145 @@ var tb1r14 = greyback.querySelector(".td15");
 var tb1r15 = greyback.querySelector(".td16");
 var ctx = /** @type {HTMLCanvasElement} */ (document.getElementById("myChart")).getContext("2d");
 var col = ["red"];
-var chartData = new Chart(ctx, {
-    type: "line",
-    data: {
-        labels: [],
-        datasets: [
-            {
-                data: [],
-                label: ["open"],
-                backgroundColor: ["#f78594"],
-                borderColor: ["#FF4560"],
-            },
-            {
-                data: [],
-                label: ["High"],
-                backgroundColor: ["#7ac1f4"],
-                borderColor: ["#008FFB"],
+var chartData;
+var labelsNew = [];
+var dataNew1 = [];
+var dataNew2 = [];
+var dataNew3 = [];
+var dataNew4 = [];
+function candleStickFunction() {
+    document.getElementById("d").style.display = "none";
+    document.getElementById("container1").style.display = "block";
+}
+function lineGraphFunction() {
+    document.getElementById("d").style.display = "block";
+    document.getElementById("container1").style.display = "none";
+}
+function chartdatacall() {
+    chartData = new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: [],
+            datasets: [
+                {
+                    data: [],
+                    label: ["open"],
+                    backgroundColor: ["#f78594"],
+                    borderColor: ["#FF4560"],
+                },
+                {
+                    data: [],
+                    label: ["High"],
+                    backgroundColor: ["#7ac1f4"],
+                    borderColor: ["#008FFB"],
 
-            },
-            {
-                data: [],
-                label: ["Low"],
-                backgroundColor: ["#74e0ba"],
-                borderColor: ["#00E396"],
-            },
-            {
-                data: [],
-                label: ["Close"],
-                backgroundColor: ["#f3c569"],
-                borderColor: ["#FEB019"],
-            },
-        ],
+                },
+                {
+                    data: [],
+                    label: ["Low"],
+                    backgroundColor: ["#74e0ba"],
+                    borderColor: ["#00E396"],
+                },
+                {
+                    data: [],
+                    label: ["Close"],
+                    backgroundColor: ["#f3c569"],
+                    borderColor: ["#FEB019"],
+                },
+            ],
 
-    },
-    options: {
-        responsive: false,
-        borderColor: ["red"],
-        BackgroundColor: ["red"],
-    }
-})
-// const xhr = new XMLHttpRequest();
+        },
+        options: {
+            responsive: false,
+            borderColor: ["red"],
+            BackgroundColor: ["red"],
+        }
+    })
+}
 
-// Open an obejct (GET/POST, PATH,
-// ASYN-TRUE/FALSE)
-// xhr.open("GET", "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&outputsize=full&apikey=RGLFHEB1DW0JDEF1", true);
-// var obj = "";
-// xhr.onload = function () {
-//     if (this.status === 200) {
-
-//         // Changing string data into JSON Object
-//         obj = JSON.parse(this.responseText);
-//         console.log(obj);
-
-//         if (obj != null) {
-
-//         }
-//     }
-//     else {
-//         console.log("File not found");
-//     }
-
-// }
-// xhr.send();
-
-
-
-// function download(content, fileName, contentType) {
-//     var a = document.createElement("a");
-//     var file = new Blob([content], { type: contentType });
-//     a.href = URL.createObjectURL(file);
-//     a.download = fileName;
-//     a.click();
-// }
-// download(obj, 'json.json', 'text/plain');
-
-
-
-// const saveData = (function () {
-//     const a = document.createElement("a");
-//     document.body.appendChild(a);
-//     a.style = "display: none";
-//     return function (url, fileName) {
-//         a.href = url;
-//         a.download = fileName;
-//         a.click();
-//     };
-// }());
-
-// const url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=RGLFHEB1DW0JDEF1&datatype=csv', // Replace with your own URL: window.location + "/downloadUserAction?draw=3&search%5Bvalue%5D=NLP_SEARCH&order%5B0%5D%5Bcolumn%5D=6&order%5B0%5D%5Bdir%5D=desc"
-//     fileName = "my-csv.csv";
-
-// saveData(url, fileName);
-
-// const saveData = (function () {
-//     const a = document.createElement("a");
-//     document.body.appendChild(a);
-//     a.style = "display: none";
-//     return function (data, fileName) {
-//         const blob = new Blob([data], {type: "octet/stream"}),
-//             url = window.URL.createObjectURL(blob);
-//         a.href = url;
-//         a.download = fileName;
-//         a.click();
-//         window.URL.revokeObjectURL(url);
-//     };
-// }());
-
-// const data = 'a,b,c\n5,6,7',
-//     fileName = "my-csv.csv";
-
-// saveData(data, fileName);
 function fun() {
+    $("#container1").html("");
+    document.getElementById("container1").style.display = "none";
     inputBox.value = name1;
     $.ajax({
         url: '../html/createFile.php',
         type: 'post',
         data: { "objectData": symbol },
         success: function (response) {
-            console.log(response);
-            readTextFile("../jsonFiles/" + symbol + ".json", function (text) {
-                var data = JSON.parse(text);
-                console.log(data["Meta Data"]["3. Last Refreshed"]);
-                subdate.innerText = data["Meta Data"]["3. Last Refreshed"];
-                var labelsNew = [];
-                var dataNew1 = [];
-                var dataNew2 = [];
-                var dataNew3 = [];
-                var dataNew4 = [];
+            anychart.onDocumentReady(function () {
+                table = anychart.data.table();
+                var allData = [];
+                console.log(response);
+                readTextFile("../jsonFiles/" + symbol + ".json", function (text) {
+                    var data = JSON.parse(text);
+                    console.log(data["Meta Data"]["3. Last Refreshed"]);
+                    subdate.innerText = data["Meta Data"]["3. Last Refreshed"];
 
-                let i = 0;
-                var obj2 = data["Time Series (Daily)"];
-                for (var key3 in obj2) {
-                    if (i < 25) {
-                        labelsNew.push(key3);
-                        dataNew1.push(data["Time Series (Daily)"][key3]["1. open"]);
-                        dataNew2.push(data["Time Series (Daily)"][key3]["2. high"]);
-                        dataNew3.push(data["Time Series (Daily)"][key3]["3. low"]);
-                        dataNew4.push(data["Time Series (Daily)"][key3]["4. close"]);
-                    }
-                    else {
-                        break;
-                    }
-                    i++;
-                }
 
-                // for(var key in data["Time Series (Daily)"]) {
-                //     for (var key1 in data[key]){
-                //         console.log(data[key][key1])
-                //     }
-                //  }
-                function addData(chart, label, data1, data2, data3, data4) {
-                    chart.data.labels = label
-                    let cou = 1;
-                    chart.data.datasets.forEach((dataset) => {
-                        if (cou == 1) { dataset.data = data1; }
-                        else if (cou == 2) { dataset.data = data2; }
-                        else if (cou == 3) { dataset.data = data3; }
-                        else if (cou == 4) { dataset.data = data4; }
-                        cou++;
+                    let i = 0;
+                    var obj2 = data["Time Series (Daily)"];
+                    for (var key3 in obj2) {
+                        if (i < 50) {
+                            labelsNew.push(key3);
+                            var open = Number(data["Time Series (Daily)"][key3]["1. open"]);
+                            var high = Number(data["Time Series (Daily)"][key3]["2. high"]);
+                            var low = Number(data["Time Series (Daily)"][key3]["3. low"]);
+                            var close = Number(data["Time Series (Daily)"][key3]["4. close"]);
+                            dataNew1.push(open);
+                            dataNew2.push(high);
+                            dataNew3.push(low);
+                            dataNew4.push(close);
+                            allData.push([key3, open, high, low, close]);
+                        }
+                        else {
+                            break;
+                        }
+                        i++;
+                    }
+                    table.addData(allData);
+                    mapping = table.mapAs();
+                    mapping.addField('open', 1, 'first');
+                    mapping.addField('high', 2, 'max');
+                    mapping.addField('low', 3, 'min');
+                    mapping.addField('close', 4, 'last');
+                    mapping.addField('value', 4, 'last');
+                    var chart = anychart.stock();
+                    var series = chart.plot(0).candlestick(mapping);
+                    series.name(symbol + " Trade Data");
+                    series.pointWidth('65%');
+
+                    series.normal().fallingFill("#F34A2E", 0.9);
+                    chart.scroller().enabled(false);
+
+
+                    series.normal().risingFill("#40D55C", 0.9);
+
+                    chart.title(name1 + " Historical Trade Data");
+                    chart.container('container1');
+
+                    chart.background().fill({
+                        keys: ["#202124", "#383838", "#202124"],
+                        angle: 160,
                     });
-                    chart.update();
-                }
-                labelsNew.reverse();
-                dataNew1.reverse();
-                dataNew2.reverse();
-                dataNew3.reverse();
-                dataNew4.reverse();
-                console.log(dataNew2);
-                addData(chartData, labelsNew, dataNew1, dataNew2, dataNew3, dataNew4);
 
+                    // draw the chart
+                    chart.draw();
+
+
+                    labelsNew.reverse();
+                    dataNew1.reverse();
+                    dataNew2.reverse();
+                    dataNew3.reverse();
+                    dataNew4.reverse();
+                    console.log(dataNew2);
+                    chartdatacall();
+                    if (document.getElementById('op-1').checked) {
+                        console.log("hqoq");
+                        addData(chartData, labelsNew, dataNew1, dataNew2, dataNew3, dataNew4);
+                    }
+
+
+                });
             });
             readTextFile("../jsonFiles/" + symbol + "OverView.json", function (text) {
                 var data = JSON.parse(text);
@@ -239,26 +209,250 @@ function fun() {
                 tb1r4.innerText = "Low : " + data["Global Quote"]["04. low"];
                 tb1r5.innerText = "Previous close : " + data["Global Quote"]["08. previous close"];
             });
-
         }
     });
 }
 fun();
 
 
+function myFunction() {
+    // document.getElementById("container1").innerHTML = "";
+    // var old_html = $("#container1").html();
+    $("#container1").html("");
+    labelsNew.length = 0;
+    dataNew1.length = 0
+    dataNew2.length = 0;
+    dataNew3.length = 0;
+    dataNew4.length = 0;
+    chartData.destroy();
+    chartdatacall();
+    anychart.onDocumentReady(function () {
+        table = anychart.data.table();
+        var allData = [];
+        readTextFile("../jsonFiles/" + symbol + ".json", function (text) {
+            var data = JSON.parse(text);
+            console.log(data["Meta Data"]["3. Last Refreshed"]);
+            subdate.innerText = data["Meta Data"]["3. Last Refreshed"];
+            let i = 0;
+            var obj2 = data["Time Series (Daily)"];
+            for (var key3 in obj2) {
+                if (i < 50) {
+                    labelsNew.push(key3);
+                    var open = Number(data["Time Series (Daily)"][key3]["1. open"]);
+                    var high = Number(data["Time Series (Daily)"][key3]["2. high"]);
+                    var low = Number(data["Time Series (Daily)"][key3]["3. low"]);
+                    var close = Number(data["Time Series (Daily)"][key3]["4. close"]);
+                    dataNew1.push(open);
+                    dataNew2.push(high);
+                    dataNew3.push(low);
+                    dataNew4.push(close);
+                    allData.push([key3, open, high, low, close]);
+                }
+                else {
+                    break;
+                }
+                i++;
+            }
+            table.addData(allData);
+            mapping = table.mapAs();
+            mapping.addField('open', 1, 'first');
+            mapping.addField('high', 2, 'max');
+            mapping.addField('low', 3, 'min');
+            mapping.addField('close', 4, 'last');
+            mapping.addField('value', 4, 'last');
+            var chart = anychart.stock();
+            var series = chart.plot(0).candlestick(mapping);
+            series.name(symbol + " Trade Data");
+            series.pointWidth('65%');
+
+            series.normal().fallingFill("#F34A2E", 0.9);
+            chart.scroller().enabled(false);
 
 
-// $.getJSON("RELI.json", function (data) {
-//     var items = [];
-//     $.each(data, function (key, key1, val) {
-//         items.push("<li Meta Data='" + key + "'>" + val + "</li>");
-//     });
-//     console.log(items);
-//     $("<ul/>", {
-//         "class": "my-new-list",
-//         html: items.join("")
-//     }).appendTo("body");
-// });
+            series.normal().risingFill("#40D55C", 0.9);
+
+            chart.title(name1 + " Historical Trade Data");
+            chart.container('container1');
+
+            chart.background().fill({
+                keys: ["#202124", "#383838", "#202124"],
+                angle: 160,
+            });
+
+            // draw the chart
+            chart.draw();
+
+
+            labelsNew.reverse();
+            dataNew1.reverse();
+            dataNew2.reverse();
+            dataNew3.reverse();
+            dataNew4.reverse();
+            console.log(dataNew2);
+            if (document.getElementById('op-1').checked) {
+                console.log("hqoq");
+                addData(chartData, labelsNew, dataNew1, dataNew2, dataNew3, dataNew4);
+            }
+
+        });
+    });
+}
+
+
+
+function myFunction1() {
+    $("#container1").html("");
+    labelsNew.length = 0;
+    dataNew1.length = 0
+    dataNew2.length = 0;
+    dataNew3.length = 0;
+    dataNew4.length = 0;
+    console.log("check1")
+    chartData.destroy();
+    chartdatacall();
+    anychart.onDocumentReady(function () {
+        table = anychart.data.table();
+        var allData = [];
+        readTextFile("../jsonFiles/" + symbol + "Monthly.json", function (text) {
+            var data = JSON.parse(text);
+            let i = 0;
+            var obj2 = data["Monthly Time Series"];
+            for (var key3 in obj2) {
+                if (i < 50) {
+                    labelsNew.push(key3);
+                    var open = data["Monthly Time Series"][key3]["1. open"];
+                    var high = data["Monthly Time Series"][key3]["2. high"];
+                    var low = data["Monthly Time Series"][key3]["3. low"];
+                    var close = data["Monthly Time Series"][key3]["4. close"];
+                    dataNew1.push(open);
+                    dataNew2.push(high);
+                    dataNew3.push(low);
+                    dataNew4.push(close);
+                    allData.push([key3, open, high, low, close]);
+                }
+                else {
+                    break;
+                }
+                i++;
+            }
+            table.addData(allData);
+            mapping = table.mapAs();
+            mapping.addField('open', 1, 'first');
+            mapping.addField('high', 2, 'max');
+            mapping.addField('low', 3, 'min');
+            mapping.addField('close', 4, 'last');
+            mapping.addField('value', 4, 'last');
+            var chart = anychart.stock();
+            var series = chart.plot(0).candlestick(mapping);
+            series.name(symbol + " Trade Data");
+            series.pointWidth('65%');
+
+            series.normal().fallingFill("#F34A2E", 0.9);
+            chart.scroller().enabled(false);
+
+
+            series.normal().risingFill("#40D55C", 0.9);
+
+            chart.title(name1 + " Historical Trade Data");
+            chart.container('container1');
+
+            chart.background().fill({
+                keys: ["#202124", "#383838", "#202124"],
+                angle: 160,
+            });
+
+            // draw the chart
+            chart.draw();
+
+            labelsNew.reverse();
+            dataNew1.reverse();
+            dataNew2.reverse();
+            dataNew3.reverse();
+            dataNew4.reverse();
+            console.log(data);
+            addData(chartData, labelsNew, dataNew1, dataNew2, dataNew3, dataNew4);
+        });
+    });
+}
+function myFunction2() {
+    labelsNew.length = 0;
+    dataNew1.length = 0
+    dataNew2.length = 0;
+    dataNew3.length = 0;
+    dataNew4.length = 0;
+    $("#container1").html("");
+    console.log("check2")
+    chartData.destroy();
+    chartdatacall();
+    anychart.onDocumentReady(function () {
+        table = anychart.data.table();
+        var allData = [];
+        readTextFile("../jsonFiles/" + symbol + "Weekly.json", function (text) {
+            var data = JSON.parse(text);
+            let i = 0;
+            var obj2 = data["Weekly Time Series"];
+
+
+            for (var key3 in obj2) {
+                if (i < 50) {
+                    labelsNew.push(key3);
+                    var open = data["Weekly Time Series"][key3]["1. open"];
+                    var high = data["Weekly Time Series"][key3]["2. high"];
+                    var low = data["Weekly Time Series"][key3]["3. low"];
+                    var close = data["Weekly Time Series"][key3]["4. close"];
+                    dataNew1.push(open);
+                    dataNew2.push(high);
+                    dataNew3.push(low);
+                    dataNew4.push(close);
+                    allData.push([key3, open, high, low, close]);
+                }
+                else {
+                    break;
+                }
+                i++;
+            }
+            table.addData(allData);
+            mapping = table.mapAs();
+            mapping.addField('open', 1, 'first');
+            mapping.addField('high', 2, 'max');
+            mapping.addField('low', 3, 'min');
+            mapping.addField('close', 4, 'last');
+            mapping.addField('value', 4, 'last');
+            var chart = anychart.stock();
+            var series = chart.plot(0).candlestick(mapping);
+            series.name(symbol + " Trade Data");
+            series.pointWidth('65%');
+
+            series.normal().fallingFill("#F34A2E", 0.9);
+            chart.scroller().enabled(false);
+
+
+            series.normal().risingFill("#40D55C", 0.9);
+
+            chart.title(name1 + " Historical Trade Data");
+            chart.container('container1');
+
+            chart.background().fill({
+                keys: ["#202124", "#383838", "#202124"],
+                angle: 160,
+            });
+
+            // draw the chart
+            chart.draw();
+
+            labelsNew.reverse();
+            dataNew1.reverse();
+            dataNew2.reverse();
+            dataNew3.reverse();
+            dataNew4.reverse();
+            console.log(labelsNew);
+            addData(chartData, labelsNew, dataNew1, dataNew2, dataNew3, dataNew4);
+        });
+    });
+
+}
+
+
 
 function readTextFile(file, callback) {
     var rawFile = new XMLHttpRequest();
@@ -270,4 +464,16 @@ function readTextFile(file, callback) {
         }
     }
     rawFile.send(null);
+}
+function addData(chart, label, data1, data2, data3, data4) {
+    chart.data.labels = label
+    let cou = 1;
+    chart.data.datasets.forEach((dataset) => {
+        if (cou == 1) { dataset.data = data1; }
+        else if (cou == 2) { dataset.data = data2; }
+        else if (cou == 3) { dataset.data = data3; }
+        else if (cou == 4) { dataset.data = data4; }
+        cou++;
+    });
+    chart.update();
 }

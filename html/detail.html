@@ -14,7 +14,14 @@
     <!-- <script async src='/cdn-cgi/bm/cv/669835187/api.js'></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="../js/setDetailData.js" defer></script>
+    <link rel="stylesheet" href="../css/radioButton.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-core.min.js" type="text/javascript"></script>
+    <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-stock.min.js" type="text/javascript"></script>
+    <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-data-adapter.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.anychart.com/releases/8.11.0/css/anychart-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.anychart.com/releases/8.11.0/fonts/css/anychart-font.min.css" />
     <title>Detail page</title>
 </head>
 <body>
@@ -136,33 +143,70 @@
                             </table>
                         </div>
                     </div>
-                    <div class="graphbox">
-                        <div class="buttonbox">
-                            <p class="daily">Daily</p><hr>
-                            <p class="weekly">Weekly</p><hr>
-                            <p class="monthly">Monthly</p>
-                        </div>
-                        <div class="graph">
-                            <canvas id="myChart" aria-label="chart" role="img" height="350" width="600"></canvas>
+                    <div class="mainbox">
+
+                        <div class="graphbox">
+                            <!-- <div class="buttonbox">
+                                <p class="daily">Daily</p><hr>
+                                <p class="weekly">Weekly</p><hr>
+                                <p class="monthly">Monthly</p>
+                        </div> -->
+                        <div class="radiobuttonslist">
+                        <div class="wrapper1">
+                            <input type="radio" name="select1" id="op-1" checked onclick="if(this.checked){myFunction()}">
+                            <input type="radio" name="select1" id="op-2" onclick="if(this.checked){myFunction1()}">
+                            <input type="radio" name="select1" id="op-3" onclick="if(this.checked){myFunction2()}">
+                              <label for="op-1" class="op op-1">
+                                <div class="dot1"></div>
+                                <span>Daily</span>
+                                 </label>
+                                 <label for="op-2" class="op op-2">
+                                     <div class="dot1"></div>
+                                     <span>Weekly</span>
+                                    </label>
+                                    <label for="op-3" class="op op-3">
+                                <div class="dot1"></div>
+                                 <span>Monthly</span>
+                              </label>
+                           </div>
+                           <div class="wrapper2">
+                               <input type="radio" name="select" id="option-1" checked onclick="if(this.checked){lineGraphFunction()}">
+                            <input type="radio" name="select" id="option-2" onclick=" if(this.checked){candleStickFunction()}">
+                              <label for="option-1" class="option option-1" >
+                                <div class="dot"></div>
+                                <span>LineGraph</span>
+                            </label>
+                            <label for="option-2" class="option option-2">
+                                <div class="dot"></div>
+                                <span>CandleStick</span>
+                            </label>
                         </div>
                     </div>
-                    <p class="news">News</p>
-                    <div class="newsbox">
-                        <div class="newsheads">
-                                <table>
-                                    <tbody class="newstable">
-                                        <tr><td>News Headings</td></tr>
-                                        <tr><td>News Headings</td></tr>
-                                        <tr><td>News Headings</td></tr>
-                                        <tr><td>News Headings</td></tr>
-                                    </tbody>
-                                </table>
+                    <div class="graph" >
+                        <div id="d">
+                            <canvas id="myChart" aria-label="chart" role="img" height="350" width="600"></canvas>
                         </div>
+                        <div id="container1"></div>
+                    </div>
+                </div>
+                <p class="news">News</p>
+                <div class="newsbox">
+                    <div class="newsheads">
+                        <table>
+                            <tbody class="newstable">
+                                <tr><td>News Headings</td></tr>
+                                <tr><td>News Headings</td></tr>
+                                <tr><td>News Headings</td></tr>
+                                <tr><td>News Headings</td></tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
+</div>
     <script src="../js/suggestions.js"></script>
     <script src="../js/searchscript.js"></script>
     <!-- <script src="../js/getdate.js"></script> -->
