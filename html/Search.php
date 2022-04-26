@@ -53,7 +53,7 @@
                             </a>
                         </li>
                         <li class="list">
-                            <a href="#" class="anchor">
+                            <a href="Compare.html" class="anchor">
                                 <img src="../images/analysis.png" alt="img" class="icons"></img>
                                 Analysis
                             </a>
@@ -202,7 +202,7 @@ else if(value!=stringtime){
                 if(abcd==2){
                 var table = document.querySelector(".companydata");
                 var c =<?php echo (int)$row["closed"];?>;
-                var d = <?php echo (int)$row["differences"];?>;
+                var d = <?php echo (float)$row["differences"];?>;
                 var p = <?php echo (float)$row["percent"];?>;
                 var row =`<tr><td style="color: #3b3c3d; font-family: "Mulish", sans-serif;"><?php echo $row["company_name"];?></td>`;
                 row+=`<td style="color: #3b3c3d;font-family: "Mulish", sans-serif;"><?php echo $row["closed"];?></td>`

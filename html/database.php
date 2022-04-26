@@ -1,5 +1,5 @@
 <?php
-    $url='localhost';
+    $url='localhost:3307';
     $username='root';
     $password='';
     $conn=mysqli_connect($url,$username,$password,"register");
