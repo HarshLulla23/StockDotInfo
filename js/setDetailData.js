@@ -23,6 +23,10 @@ var tb1r12 = greyback.querySelector(".td13");
 var tb1r13 = greyback.querySelector(".td14");
 var tb1r14 = greyback.querySelector(".td15");
 var tb1r15 = greyback.querySelector(".td16");
+var news1=document.getElementById("news1");
+var news2=document.getElementById("news2");
+var news3=document.getElementById("news3");
+var newsData=[];
 var ctx = /** @type {HTMLCanvasElement} */ (document.getElementById("myChart")).getContext("2d");
 var col = ["red"];
 var chartData;
@@ -31,6 +35,7 @@ var dataNew1 = [];
 var dataNew2 = [];
 var dataNew3 = [];
 var dataNew4 = [];
+console.log(symbol);
 function candleStickFunction() {
     document.getElementById("d").style.display = "none";
     document.getElementById("container1").style.display = "block";
@@ -477,3 +482,53 @@ function addData(chart, label, data1, data2, data3, data4) {
     });
     chart.update();
 }
+
+const xhr = new XMLHttpRequest();
+xhr.open("GET", "https://api.marketaux.com/v1/news/all?symbols=" + symbol + "&filter_entities=true&language=en&api_token=DTAoMSsWq2ln2SujmiaCsiHIaWAC9hzXLs6KsyZY", true);
+
+xhr.onload = function () {
+    if (this.status === 200) {
+
+        // Changing string data into JSON Object
+        var obj = JSON.parse(this.responseText);
+        
+        
+        for(var i=0;i<3;i++){
+            newsData.push(obj["data"][i]["entities"][0]["highlights"][0]["highlight"]);
+        }
+        news1.innerHTML=newsData[0]+"\n\n";
+        news2.innerHTML=newsData[1]+"\n\n";
+        news3.innerHTML=newsData[2]+"\n\n";
+        console.log(newsData[2]);
+        // for (key in obj["data"]) {
+        //     suggestions1.push(obj["bestMatches"][key]["2. name"] + " " + obj["bestMatches"][key]["1. symbol"]);
+        //     sym[obj["bestMatches"][key]["2. name"] + " " + obj["bestMatches"][key]["1. symbol"]] = obj["bestMatches"][key]["1. symbol"];
+        // }
+
+        // if (userData) {
+        //     emptyArray = suggestions1.filter((data) => {
+        //         //filtering array value and user char to lowercase and return only those words which starts with userdata
+        //         return data.toLocaleLowerCase();
+        //     });
+        //     emptyArray = emptyArray.map((data) => {
+        //         return data = '<li>' + data + '</li>';
+        //     });
+        //     // console.log(emptyArray); //remove comment to see suggestion array on console
+        //     searchinput.classList.add("active"); // show autocomplete box
+        //     showSuggestions(emptyArray);
+        //     let allList = suggBox.querySelectorAll("li");
+        //     for (let i = 0; i < allList.length; i++) {
+        //         // adding onclick attribiute to all li tag
+        //         allList[i].setAttribute("onclick", "select(this)");
+        //     }
+        // }
+        // else {
+        //     searchinput.classList.remove("active"); //hide auto complete box
+        // }
+    }
+    else {
+        console.log("File not found");
+    }
+   
+}
+xhr.send();
